@@ -10,9 +10,17 @@ table, th, td {
 th, td {
 	padding: 5px;
 }
+.error {
+	color: red;
+}
 </style>
 </head>
 <body>
+	<#if error??>
+		<div class="error">
+			<p>${error}</p>
+		</div>
+	</#if>
 	<table>
 		<caption>
 			<h3>Products by name</h3>
@@ -30,13 +38,13 @@ th, td {
 					<td>${product.name}</td>
 					<td>${product.price}</td>
 					<td>${product.creationDate}</td>
-					<td><a href=${rc.getContextPath()}/shop/products/edit/${product.id}>Edit</a></td>
-					<td><a href=${rc.getContextPath()}/shop/products/delete/${product.id}>Delete</a></td>
+					<td><a href=${rc.getContextPath()}/products/edit/${product.id}>Edit</a></td>
+					<td><a href=${rc.getContextPath()}/products/delete/${product.id}>Delete</a></td>
 				</tr>
             </#list>
 		</tbody>
 	</table>
 	<br>
-	<a href=${rc.getContextPath()}/shop/products/add>Create new</a>
+	<a href=${rc.getContextPath()}/products/add>Create new</a>
 </body>
 </html>

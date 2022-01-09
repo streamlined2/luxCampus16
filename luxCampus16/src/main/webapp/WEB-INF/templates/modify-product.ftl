@@ -29,10 +29,11 @@
 						required /></td>
 				</tr>
 			</table>
+			<input type="hidden" id="id" name="id" value="${product.id}" />
 			<hr>
-			<input type="submit" value="Save" formaction="${rc.getContextPath()}/shop/saveproduct" formmethod="post" />
+			<input type="submit" value="Save" formaction="${rc.getContextPath()}/saveproduct" formmethod="post" />
 			<input type="reset" value="Reset" />
-			<input type="submit" value="Cancel" formaction="${rc.getContextPath()}/shop/products" formmethod="post" formnovalidate />
+			<input type="submit" value="Cancel" formaction="${rc.getContextPath()}/products" formmethod="get" formnovalidate />
 		</fieldset>
 	</form>
 </body>

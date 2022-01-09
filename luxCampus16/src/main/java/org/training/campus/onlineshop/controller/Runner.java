@@ -1,5 +1,7 @@
 package org.training.campus.onlineshop.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,12 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.training.campus.onlineshop.model.Product;
 import org.training.campus.onlineshop.service.ProductService;
 
 @Controller
-@RequestMapping("/shop")
 public class Runner {
 
 	private static final String PRODUCTS_ATTRIBUTE = "products";
@@ -28,8 +28,8 @@ public class Runner {
 	}
 
 	@GetMapping("/products/delete/{id}")
-	public String deleteProduct(@PathVariable("id") String id) {
-		productService.remove(Long.parseUnsignedLong(id));
+	public String deleteProduct(@PathVariable("id") Long id) {
+		productService.remove(id);
 		return "redirect:/products";
 	}
 
@@ -40,19 +40,23 @@ public class Runner {
 	}
 
 	@PostMapping("/newproduct")
-	public String newProduct(@ModelAttribute Product product) {
+	public String newProduct(@ModelAttribute(PRODUCT_ATTRIBUTE) Product product) {
 		productService.persist(product);
 		return "redirect:/products";
 	}
 
 	@GetMapping("/products/edit/{id}")
-	public String editProduct(Model model, @PathVariable("id") String id) {
-		model.addAttribute(PRODUCT_ATTRIBUTE, productService.findById(Long.parseUnsignedLong(id)));
-		return "/modify-product";
+	public String editProduct(Model model, @PathVariable("id") Long id) {
+		Optional<Product> product = productService.findById(id);
+		if(product.isPresent()) {
+			model.addAttribute(PRODUCT_ATTRIBUTE, product.get());
+			return "/modify-product";
+		}
+		return "/new-product";
 	}
 
 	@PostMapping("/saveproduct")
-	public String saveProduct(@ModelAttribute Product product) {
+	public String saveProduct(@ModelAttribute(PRODUCT_ATTRIBUTE) Product product) {
 		productService.merge(product);
 		return "redirect:/products";
 	}

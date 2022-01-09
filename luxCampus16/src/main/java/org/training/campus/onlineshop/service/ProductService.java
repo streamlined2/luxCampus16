@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.training.campus.onlineshop.dao.jdbc.JdbcTemplateProductDao;
 import org.training.campus.onlineshop.model.Product;
 
-@Component
+@Service
 public class ProductService {
 
 	@Autowired

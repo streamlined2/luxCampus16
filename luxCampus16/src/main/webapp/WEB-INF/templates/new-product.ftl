@@ -29,9 +29,9 @@
 				</tr>
 			</table>
 			<hr>
-			<input type="submit" value="Create" formaction="${rc.getContextPath()}/shop/newproduct" formmethod="post" />
+			<input type="submit" value="Create" formaction="${rc.getContextPath()}/newproduct" formmethod="post" />
 			<input type="reset" value="Reset" />
-			<input type="submit" value="Cancel" formaction="${rc.getContextPath()}/shop/products" formmethod="post" formnovalidate />
+			<input type="submit" value="Cancel" formaction="${rc.getContextPath()}/products" formmethod="get" formnovalidate />
 		</fieldset>
 	</form>
 </body>
